@@ -8,3 +8,7 @@ class WatermarkBase(ABC):
 
 @abstractmethod
 def embed(self, host_img, watermark_payload) -> EmbedResult:
+    pass
+
+@abstractmethod
+def extract(self, watermarked_img, embed_meta=None)
