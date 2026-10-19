@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from .result import
+from .result import EmbedResult, ExtractResult, DetectResult
 
 
 class WatermarkBase(ABC):
@@ -7,4 +7,4 @@ class WatermarkBase(ABC):
         self.config = config
 
 @abstractmethod
-def embed(self, host_img, watermark_payload) ->
+def embed(self, host_img, watermark_payload) -> EmbedResult:
