@@ -31,4 +31,18 @@ class ExtractResult:
     similarity: float | None = None             #灰度水印相似程度
     ber: float | None = None                    #误码率，密钥水印
 
+    raw_bits: np.ndarray | None = None
+    valid_mask: np.ndarray | None = None
+    embed_meta: dict | None = None
 
+    @property
+    def bit_accuracy(self) -> float | None:
+        return None if self.ber is None else 1.0 - self.ber
+
+    @property
+    def extracted_bits(self) -> np.ndarray | None:
+        if self.extracted_mark is None:
+            return None
+        if self.mark_type is MarkType.BITSTREAM:
+            return self.extracted_mark.ravel()
+        return (self.extracted_mark > 127).astype(np.uint8).ravel()
