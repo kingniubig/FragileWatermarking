@@ -1,3 +1,4 @@
+from study.test1 import block
 from ..core import WatermarkBase, ExtractResult, DetectResult, EmbedResult, MarkType
 import hmac
 import hashlib
@@ -8,4 +9,8 @@ class LSBHMACWatermark(WatermarkBase):
         super().__init__(name="fragile_lsb_hmac", config=config)
 
     def embed(self, host_img, watermark_payload=None, key=None, **kwargs) -> EmbedResult:
-        pass
+        ...
+
+    def _block_auth(self, key: bytes, hash_bits: int) -> np.ndarray:
+        
+
