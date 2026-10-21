@@ -7,11 +7,20 @@ class LSBHMACWatermark(WatermarkBase):
     def __init__(self, config: dict | None = None):
         super().__init__(name="fragile_lsb_hmac", config=config)
         self.block_size = self.config.get("block_size", 8)
+        if not isinstance(self.block_size, int) or self.block_size <= 0:
+            raise ValueError("")
 
     def embed(self, host_img, watermark_payload=None, key=None, **kwargs) -> EmbedResult:
         self._validate_image(host_img)
         if key is None:
             raise ValueError("缺少密钥")
+
+        work = host_img.copy()
+        h, w = work.shape[:2]
+        bs = self.block_size
+
+        for by in range(0, h, bs):
+
 
 
 
