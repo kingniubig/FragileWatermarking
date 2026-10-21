@@ -1,4 +1,3 @@
-from study.test1 import block
 from ..core import WatermarkBase, ExtractResult, DetectResult, EmbedResult, MarkType
 import hmac
 import hashlib
