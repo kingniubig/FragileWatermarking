@@ -1,3 +1,6 @@
+from hmac import digest
+from pickletools import uint8
+
 from ..core import WatermarkBase, ExtractResult, DetectResult, EmbedResult, MarkType
 import hmac
 import hashlib
@@ -20,6 +23,10 @@ class LSBHMACWatermark(WatermarkBase):
         bs = self.block_size
 
         for by in range(0, h, bs):
+            for bx in range(0, w, bs):
+                block = work[by:by+bs, bx:bx+bs]
+                digest_ = hmac.new(key, block.tobytes(), hashlib.sha256).digest()
+                mask = np.frombuffer(digest_, dtype=np.uint8)
 
 
 
